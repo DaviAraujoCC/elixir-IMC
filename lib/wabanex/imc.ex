@@ -1,7 +1,7 @@
 defmodule Wabanex.IMC do
 
 
-  def calculate(filename) do
+  def calculate(%{"filename" => filename}) do
       filename
       |> File.read()
       |> handle_file()
@@ -13,8 +13,11 @@ defmodule Wabanex.IMC do
   end
 
   defp handle_file({:ok, content}) do
-    content
-    |> parse_file()
+    data =
+      content
+      |> parse_file()
+
+    {:ok, data}
   end
 
   def parse_file(data) do
